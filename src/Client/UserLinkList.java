@@ -15,5 +15,13 @@ public class UserLinkList {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	public void addUser(Node n) {
+		// TODO Auto-generated method stub
+		
+	}
+	public void delUser(Node n) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

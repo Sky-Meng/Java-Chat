@@ -168,7 +168,7 @@ public class ChatServer extends JFrame implements ActionListener {
 		portItem.addActionListener(this);
 		startItem.addActionListener(this);
 		stopItem.addActionListener(this);
-		exitButton.addActionListener(this);
+		exitItem.addActionListener(this);
 		helpItem.addActionListener(this);
 		//添加按钮的事件侦听
 		portSet.addActionListener(this);
