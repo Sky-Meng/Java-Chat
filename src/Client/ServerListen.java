@@ -38,7 +38,7 @@ public class ServerListen extends Thread{
 	}
 	
 	public void run() {
-		while (!isStop&&!server.isClosed()) {
+		while (!isStop && !server.isClosed()) {
 			try {
 				client=new Node();
 				client.socket=server.accept();

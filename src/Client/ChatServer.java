@@ -284,7 +284,7 @@ public class ChatServer extends JFrame implements ActionListener {
 		}else if (obj==portSet||obj==portItem) {
 			//调出端口对话框
 			PortConf portConf=new PortConf(this);
-			//portConf.show();
+			portConf.show();
 		}else if (obj==exitButton||obj==exitItem) {
 			int j=JOptionPane.showConfirmDialog(this, "真的要退出吗", "退出", JOptionPane.YES_OPTION,JOptionPane.QUESTION_MESSAGE);
 			if (j==JOptionPane.YES_OPTION) {
@@ -340,6 +340,7 @@ public class ChatServer extends JFrame implements ActionListener {
 				Node node=userLinkList.findUser(i);
 				node.input.close();
 				node.output.close();
+				node.socket.close();
 				i++;
 			}
 			stopSetver.setEnabled(false);
@@ -356,7 +357,7 @@ public class ChatServer extends JFrame implements ActionListener {
 			combobox.addItem("所有人");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e);
 		}
 		
 	}
@@ -375,7 +376,7 @@ public class ChatServer extends JFrame implements ActionListener {
 			}
 			try {
 				node.output.writeObject("服务关闭");
-				node.output.close();
+				node.output.flush();
 				
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
