@@ -27,7 +27,7 @@ public class ServerListen extends Thread{
 	 */
 	public ServerListen(ServerSocket serverSocket, JComboBox combobox, JTextArea messageShow, JTextField showStatus,
 			UserLinkList userLinkList) {
-		// TODO Auto-generated constructor stub
+		// TODO 自动生成的方法存根
 		this.server=server;
 		this.comboBox=comboBox;
 		this.textArea=textArea;
@@ -55,10 +55,10 @@ public class ServerListen extends Thread{
 				recvThread=new ServerReceive(textArea,textField,comboBox,client,userLinkList);
 				recvThread.start();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
+				// TODO 自动生成的捕捉块
 				e.printStackTrace();
 			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
+				// TODO 自动生成的捕捉块
 				e.printStackTrace();
 			}
 		}

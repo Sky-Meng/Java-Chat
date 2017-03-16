@@ -102,7 +102,7 @@ public class PortConf extends JDialog{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				// TODO 自动生成的方法存根
 				DLGINFO.setText("默认端口号为:8888");
 				dispose();
 			}

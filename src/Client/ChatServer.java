@@ -293,7 +293,7 @@ public class ChatServer extends JFrame implements ActionListener {
 			}
 		}else if (obj==helpItem) {
 			help heloDialog=new help(this);
-			//heloDialog.show;
+			heloDialog.show();
 		}else if (obj==sysMessage||obj==sysMessageButton) {
 			sendSystenMessage();
 		}
@@ -316,7 +316,7 @@ public class ChatServer extends JFrame implements ActionListener {
 			stopItem.setEnabled(true);
 			sysMessage.setEnabled(true);;
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			// TODO 自动生成的捕捉块
 			e.printStackTrace();
 		}
 		userLinkList=new UserLinkList();
@@ -356,7 +356,7 @@ public class ChatServer extends JFrame implements ActionListener {
 			combobox.removeAllItems();
 			combobox.addItem("所有人");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			// TODO 自动生成的捕捉块
 			System.out.println(e);
 		}
 		
@@ -379,7 +379,7 @@ public class ChatServer extends JFrame implements ActionListener {
 				node.output.flush();
 				
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
+				// TODO 自动生成的捕捉块
 				e.printStackTrace();
 			}
 				i++;
@@ -405,7 +405,7 @@ public class ChatServer extends JFrame implements ActionListener {
 				node.output.flush();
 				
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
+				// TODO 自动生成的捕捉块
 				e.printStackTrace();
 			}
 				i++;
@@ -433,7 +433,7 @@ public class ChatServer extends JFrame implements ActionListener {
 				node.output.flush();
 				
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
+				// TODO 自动生成的捕捉块
 				e.printStackTrace();
 			}	
 			sysMessage.setText("");
@@ -454,7 +454,7 @@ public class ChatServer extends JFrame implements ActionListener {
 			mediaTracker.addImage(image, 0);
 			mediaTracker.waitForID(0);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
+			// TODO 自动生成的捕捉块
 			image=null;
 		}
 		if (mediaTracker.isErrorID(0)) {
