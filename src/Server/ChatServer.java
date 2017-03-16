@@ -1,4 +1,4 @@
-package Client;
+package Server;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
