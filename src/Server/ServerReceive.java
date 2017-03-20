@@ -34,7 +34,6 @@ public class ServerReceive extends Thread {
 			try {
 				String type = (String) client.input.readObject();
 				if (type.equalsIgnoreCase("聊天信息")) {
-  					String toSomebody = (String)client.input.readObject();//添加行
 					String status = (String) client.input.readObject();
 					String action = (String) client.input.readObject();
 					String message = (String) client.input.readObject();
