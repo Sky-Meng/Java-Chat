@@ -38,7 +38,8 @@ public class UserLinkList {
 		pointer = root;
 		while (pointer.next != null) {
 			if (pointer.next == n) {
-				pointer = pointer.next;
+				pointer.next = n.next;
+				//pointer = pointer.next;
 				count--;
 				break;
 			}

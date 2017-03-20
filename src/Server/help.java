@@ -46,7 +46,7 @@ public class help extends JDialog {
 
 	private void jbInit() throws Exception{
 		// TODO 自动生成的方法存根
-		this.setSize(new Dimension(420, 200));
+		this.setSize(new Dimension(400, 200));
 		this.setTitle("帮助");
 		
 		//设置背景颜色和提示框一致
@@ -57,7 +57,7 @@ public class help extends JDialog {
 		help.setText("1、设置服务端的侦听端口(默认端口为:8888)。\n"+
 					 "2、单击“启动服务”按钮便可在指定的端口启动服务。\n"+
 					 "3、选择需要接收消息的用户，在消息栏中写入消息，之后便可以发送消息。\n"+
-					 "4、信息状态栏中吸纳是服务器当前的启动与停止状态、"+
+					 "4、信息状态栏中显示服务器当前的启动与停止状态、"+
 					 "用户发送的消息和\n      服务器端发送的系统消息.");
 		help.setEditable(false);//设置对话框为不可编辑
 		
@@ -66,9 +66,13 @@ public class help extends JDialog {
 		titlePanel.add(new Label("          "));
 		
 		contentPanel.add(help);
-		contentPanel.add(new Label("          "));//设置按钮左右距离
-		contentPanel.add(close);
-		contentPanel.add(new Label("          "));
+		closePanel.add(new Label("              "));
+		closePanel.add(close);
+		closePanel.add(new Label("              "));
+		
+		//contentPanel.add(new Label("          "));//设置按钮左右距离
+		//contentPanel.add(close);
+		//contentPanel.add(new Label("          "));
 		
 		Container contentPane=getContentPane();
 		contentPane.setLayout(new BorderLayout());

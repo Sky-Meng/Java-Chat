@@ -34,6 +34,7 @@ public class ServerReceive extends Thread {
 			try {
 				String type = (String) client.input.readObject();
 				if (type.equalsIgnoreCase("聊天信息")) {
+  					String toSomebody = (String)client.input.readObject();//添加行
 					String status = (String) client.input.readObject();
 					String action = (String) client.input.readObject();
 					String message = (String) client.input.readObject();
@@ -48,7 +49,7 @@ public class ServerReceive extends Thread {
 						try {
 							client.output.writeObject("聊天信息");
 							client.output.flush();
-							client.output.writeObject("msg");
+							client.output.writeObject(msg);
 							client.output.flush();
 						} catch (Exception e) {
 							
@@ -58,7 +59,7 @@ public class ServerReceive extends Thread {
 						if (node != null) {
 							node.output.writeObject("聊天信息");
 							node.output.flush();
-							node.output.writeObject("msg");
+							node.output.writeObject(msg);
 							node.output.flush();
 						}
 
@@ -73,7 +74,7 @@ public class ServerReceive extends Thread {
 					comboBox.removeAllItems();
 					comboBox.addItem("所有人");
 					int i = 0;
-					while (1 < count) {
+					while (i < count) {
 						node = userLinkList.findUser(i);
 						if (node == null) {
 							i++;
@@ -82,11 +83,11 @@ public class ServerReceive extends Thread {
 						comboBox.addItem(node.username);
 						i++;
 					}
-					comboBox.setSelectedItem(0);
+					comboBox.setSelectedIndex(0);
 					textArea.append(msg);
 					textField.setText("在线用户" + userLinkList.getCount() + "人/n");
-					sendToall(msg);
-					sendUserList();
+					sendToall(msg); //向所有人发送消息
+					sendUserList();//重新发送用户列表,刷新
 					break;
 				}
 			} catch (ClassNotFoundException e) {
@@ -100,7 +101,7 @@ public class ServerReceive extends Thread {
 	/*
 	 * 向所有人发送消息
 	 */
-	private void sendToall(String msg) {
+	public void sendToall(String msg) {
 		// TODO Auto-generated method stub
 		int count = userLinkList.getCount();
 		int i = 0;
@@ -126,7 +127,7 @@ public class ServerReceive extends Thread {
 	/*
 	 * 向所有人发送用户的列表
 	 */
-	private void sendUserList() {
+	public void sendUserList() {
 		// TODO Auto-generated method stub
 		String userlist = "";
 		int count = userLinkList.getCount();

@@ -15,7 +15,6 @@ import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.URL;
@@ -55,10 +54,10 @@ public class ChatServer extends JFrame implements ActionListener {
 	//建立菜单组
 	JMenu serviceMenu=new JMenu("服务(V)");
 	//建立菜单项
-	JMenuItem portItem=new JMenuItem("端口设置(p)");
-	JMenuItem startItem=new JMenuItem("启动服务(S)");
-	JMenuItem stopItem=new JMenuItem("停止服务(T)");
-	JMenuItem exitItem=new JMenuItem("退出(X)");
+	JMenuItem portItem = new JMenuItem ("端口设置(P)");
+	JMenuItem startItem = new JMenuItem ("启动服务(S)");
+	JMenuItem stopItem=new JMenuItem ("停止服务(T)");
+	JMenuItem exitItem=new JMenuItem ("退出(X)");
 	
 	JMenu helpMenu=new JMenu("帮助(H)");
 	JMenuItem helpItem=new JMenuItem("帮助(H)");
@@ -69,17 +68,17 @@ public class ChatServer extends JFrame implements ActionListener {
 	//建立工具栏中的按钮组件
 	JButton portSet;	//启动服务端端口
 	JButton startServer; //启动服务端侦听
-	JButton stopSetver;	//关闭服务端侦听
+	JButton stopServer;	//关闭服务端侦听
 	JButton exitButton; //退出按钮
 	
 	//框架的大小
-	Dimension faceSiae=new Dimension(400, 600);
+	Dimension faceSize = new Dimension(400, 600);
 	
 	ServerListen listenThread;
 	
 	JPanel downPanel;
-	GridBagLayout gridBag;
-	GridBagConstraints gridBagCon;
+	GridBagLayout girdBag;
+	GridBagConstraints girdBagCon;
 	
 	/**
 	 * 服务端构造函数
@@ -91,17 +90,17 @@ public class ChatServer extends JFrame implements ActionListener {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.pack();
 		//设置框架的大小
-		this.setSize(faceSiae);
+		this.setSize(faceSize);
 		//设置运行时窗口的位置
 		Dimension screenSize=Toolkit.getDefaultToolkit().getScreenSize();
-		this.setLocation((int)(screenSize.width-faceSiae.getWidth())/2, (int)(screenSize.height-faceSiae.getHeight())/2);
+		this.setLocation((int)(screenSize.width-faceSize.getWidth())/2, (int)(screenSize.height-faceSize.getHeight())/2);
 		this.setResizable(false);
 		
 		this.setTitle("聊天室服务端");//设置标题
 		
 		//程序图标
-		icon=getIconImage();
-		this.setIconImage(icon);
+		icon = getImage("");
+		this.setIconImage(icon); //设置程序图标
 		show();
 		
 		//为服务菜单设置热键V
@@ -151,18 +150,18 @@ public class ChatServer extends JFrame implements ActionListener {
 		//初始化按钮
 		portSet=new JButton("端口设置");
 		startServer=new JButton("启动服务");
-		stopSetver=new JButton("停止服务");
+		stopServer=new JButton("停止服务");
 		exitButton=new JButton("退出");
 		//将按钮添加到工具栏
 		toolBar.add(portSet);
 		toolBar.addSeparator();
 		toolBar.add(startServer);
-		toolBar.add(stopSetver);
+		toolBar.add(stopServer);
 		toolBar.addSeparator();
 		toolBar.add(exitButton);
 		contentPane.add(toolBar, BorderLayout.NORTH);
 		//初始时，令停止服务按钮不可用
-		stopSetver.setEnabled(false);
+		stopServer.setEnabled(false);
 		stopItem.setEnabled(false);
 		//为菜单栏添加时间监听
 		portItem.addActionListener(this);
@@ -173,12 +172,12 @@ public class ChatServer extends JFrame implements ActionListener {
 		//添加按钮的事件侦听
 		portSet.addActionListener(this);
 		startServer.addActionListener(this);
-		stopSetver.addActionListener(this);
+		stopServer.addActionListener(this);
 		exitButton.addActionListener(this);
 		
 		combobox=new JComboBox();
 		combobox.insertItemAt("所有人", 0); //添加条目 0代表第一个
-		combobox.setSelectedItem(0);
+		combobox.setSelectedIndex(0);
 		
 		messageShow =new JTextArea();
 		messageShow.setEditable(false);
@@ -191,7 +190,8 @@ public class ChatServer extends JFrame implements ActionListener {
 		showStatus.setEditable(false);
 		
 		sysMessage=new JTextField(24);
-		sysMessage.setEditable(false);
+		sysMessage.setEnabled(false);
+	//	sysMessage.setEditable(false);
 		sysMessageButton=new JButton();
 		sysMessageButton.setText("发送");
 		//添加系统消息的事件侦听
@@ -201,59 +201,59 @@ public class ChatServer extends JFrame implements ActionListener {
 		sendToLabel=new JLabel("发送至");
 		messageLabel=new JLabel("发送消息");
 		downPanel=new JPanel();
-		gridBag=new GridBagLayout();
-		downPanel.setLayout(gridBag);
+		girdBag=new GridBagLayout();
+		downPanel.setLayout(girdBag);
 		
-		gridBagCon=new GridBagConstraints();
-		gridBagCon.gridx=0;
-		gridBagCon.gridy=0;
-		gridBagCon.gridwidth=3;
-		gridBagCon.gridheight=2;
-		gridBagCon.ipadx=5;
-		gridBagCon.ipady=5;
+		girdBagCon=new GridBagConstraints();
+		girdBagCon.gridx=0;
+		girdBagCon.gridy=0;
+		girdBagCon.gridwidth=3;
+		girdBagCon.gridheight=2;
+		girdBagCon.ipadx=5;
+		girdBagCon.ipady=5;
 		JLabel none=new JLabel("  ");
-		gridBag.setConstraints(none, gridBagCon);
+		girdBag.setConstraints(none, girdBagCon);
 		downPanel.add(none);
 		//布局发送至 文字位置
-		gridBagCon=new GridBagConstraints();
-		gridBagCon.gridx=0;
-		gridBagCon.gridy=2;
-		gridBagCon.insets=new Insets(1, 0, 0, 0);
-		gridBagCon.ipadx=5;
-		gridBagCon.ipady=5;
-		gridBag.setConstraints(sendToLabel, gridBagCon);
+		girdBagCon=new GridBagConstraints();
+		girdBagCon.gridx=0;
+		girdBagCon.gridy=2;
+		girdBagCon.insets=new Insets(1, 0, 0, 0);
+		girdBagCon.ipadx=5;
+		girdBagCon.ipady=5;
+		girdBag.setConstraints(sendToLabel, girdBagCon);
 		downPanel.add(sendToLabel);
 		//添加布局发送至选项栏
-		gridBagCon=new GridBagConstraints();
-		gridBagCon.gridx=1;
-		gridBagCon.gridy=2;
-		gridBagCon.anchor=GridBagConstraints.LAST_LINE_START;
-		gridBag.setConstraints(combobox, gridBagCon);
+		girdBagCon=new GridBagConstraints();
+		girdBagCon.gridx=1;
+		girdBagCon.gridy=2;
+		girdBagCon.anchor=GridBagConstraints.LINE_START;
+		girdBag.setConstraints(combobox, girdBagCon);
 		downPanel.add(combobox);
 		//添加发送消息 文字位置
-		gridBagCon=new GridBagConstraints();
-		gridBagCon.gridx=0;
-		gridBagCon.gridy=3;
-		gridBag.setConstraints(messageLabel, gridBagCon);
+		girdBagCon=new GridBagConstraints();
+		girdBagCon.gridx=0;
+		girdBagCon.gridy=3;
+		girdBag.setConstraints(messageLabel, girdBagCon);
 		downPanel.add(messageLabel);
 		//添加布局消息发送 文本框
-		gridBagCon=new GridBagConstraints();
-		gridBagCon.gridx=1;
-		gridBagCon.gridy=3;
-		gridBag.setConstraints(sysMessage, gridBagCon);
+		girdBagCon=new GridBagConstraints();
+		girdBagCon.gridx=1;
+		girdBagCon.gridy=3;
+		girdBag.setConstraints(sysMessage, girdBagCon);
 		downPanel.add(sysMessage);
 		//添加布局消息发送按钮
-		gridBagCon=new GridBagConstraints();
-		gridBagCon.gridx=2;
-		gridBagCon.gridy=3;
-		gridBag.setConstraints(sysMessageButton, gridBagCon);
+		girdBagCon=new GridBagConstraints();
+		girdBagCon.gridx=2;
+		girdBagCon.gridy=3;
+		girdBag.setConstraints(sysMessageButton, girdBagCon);
 		downPanel.add(sysMessageButton);
 		
-		gridBagCon=new GridBagConstraints();
-		gridBagCon.gridx=0;
-		gridBagCon.gridy=4;
-		gridBagCon.gridwidth=3;
-		gridBag.setConstraints(showStatus, gridBagCon);
+		girdBagCon=new GridBagConstraints();
+		girdBagCon.gridx=0;
+		girdBagCon.gridy=4;
+		girdBagCon.gridwidth=3;
+		girdBag.setConstraints(showStatus, girdBagCon);
 		downPanel.add(showStatus);
 		
 		contentPane.add(messageScrollPane, BorderLayout.CENTER);
@@ -276,7 +276,7 @@ public class ChatServer extends JFrame implements ActionListener {
 		Object obj=e.getSource();
 		if (obj==startServer||obj==startItem) {
 			startService();
-		} else if (obj==stopSetver||obj==stopItem) {
+		} else if (obj==stopServer||obj==stopItem) {
 			int j=JOptionPane.showConfirmDialog(this, "真的停止服务吗", "停止服务", JOptionPane.YES_OPTION,JOptionPane.QUESTION_MESSAGE);
 			if (j==JOptionPane.YES_OPTION) {
 				stopService();
@@ -295,7 +295,7 @@ public class ChatServer extends JFrame implements ActionListener {
 			help heloDialog=new help(this);
 			heloDialog.show();
 		}else if (obj==sysMessage||obj==sysMessageButton) {
-			sendSystenMessage();
+			sendSystemMessage();
 		}
 	}
 	
@@ -312,7 +312,7 @@ public class ChatServer extends JFrame implements ActionListener {
 			portSet.setEnabled(false);
 			portItem.setEnabled(false);
 			
-			stopSetver.setEnabled(true);
+			stopServer.setEnabled(true);
 			stopItem.setEnabled(true);
 			sysMessage.setEnabled(true);;
 		} catch (IOException e) {
@@ -334,16 +334,18 @@ public class ChatServer extends JFrame implements ActionListener {
 			listenThread.isStop=true;
 			serverSocket.close();
 			
-			int cuunt=userLinkList.getCount();
-			int i=0;
-			while (i<cuunt) {
-				Node node=userLinkList.findUser(i);
-				node.input.close();
+			int count = userLinkList.getCount();
+			
+			int i =0;
+			while( i < count){
+				Node node = userLinkList.findUser(i);
+				
+				node.input .close();
 				node.output.close();
 				node.socket.close();
 				i++;
 			}
-			stopSetver.setEnabled(false);
+			stopServer.setEnabled(false);
 			stopItem.setEnabled(false);
 			startServer.setEnabled(true);
 			startItem.setEnabled(true);
@@ -355,9 +357,12 @@ public class ChatServer extends JFrame implements ActionListener {
 			
 			combobox.removeAllItems();
 			combobox.addItem("所有人");
-		} catch (IOException e) {
+		} catch (NullPointerException e) {
 			// TODO 自动生成的捕捉块
 			System.out.println(e);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 	}
@@ -399,7 +404,7 @@ public class ChatServer extends JFrame implements ActionListener {
 				continue;
 			}
 			try {
-				node.output.writeObject("");
+				node.output.writeObject("系统信息");
 				node.output.flush();
 				node.output.writeObject(msg);
 				node.output.flush();
@@ -416,13 +421,14 @@ public class ChatServer extends JFrame implements ActionListener {
 	/**
 	 * 向客户端用户发送消息
 	 */
-	public void sendSystenMessage() {
-		String toSomebody=combobox.getSelectedItem().toString();
-		String message=sysMessage.getText()+"\n";
+	public void sendSystemMessage(){
+		String toSomebody = combobox.getSelectedItem().toString();
+		String message = sysMessage.getText() + "\n";
 		
 		messageShow.append(message);
 		
-		if (toSomebody.equals("所有人")) {
+		if(toSomebody.equalsIgnoreCase("所有人")){
+	
 			sendMsgToAll(message);
 		} else {
 			Node node=userLinkList.findUser(toSomebody);
