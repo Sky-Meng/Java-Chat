@@ -27,17 +27,18 @@ public class ServerReceive extends Thread {
 		isStop = false;
 	}
 
-	public void run(String toSomebody) {
+	public void run() {
 		// 向所有人发送用户的列表
 		sendUserList();
-		while (!isStop && client.socket.isClosed()) {
+		while (!isStop && !client.socket.isClosed()) {
 			try {
 				String type = (String) client.input.readObject();
 				if (type.equalsIgnoreCase("聊天信息")) {
+					String toSomebody = (String)client.input.readObject();
 					String status = (String) client.input.readObject();
 					String action = (String) client.input.readObject();
 					String message = (String) client.input.readObject();
-					String msg = client.username + " " + action + "对" + toSomebody + "说:" + message + "/n";
+					String msg = client.username + " " + action + "对" + toSomebody + "说:" + message + "\n";
 					if (status.equalsIgnoreCase("悄悄话")) {
 						msg = "[悄悄话]" + msg;
 					}

@@ -18,7 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
-public class help extends JDialog {
+public class Help extends JDialog {
 	JPanel titlePanel=new JPanel();
 	JPanel contentPanel=new JPanel();
 	JPanel closePanel=new JPanel();
@@ -28,7 +28,7 @@ public class help extends JDialog {
 	JTextArea help=new JTextArea();
 	Color bg=new Color(255, 255, 255);
 	
-	public help( JFrame frame) {
+	public Help( JFrame frame) {
 		// TODO 自动生成的方法存根
 		super(frame, true);
 		try {

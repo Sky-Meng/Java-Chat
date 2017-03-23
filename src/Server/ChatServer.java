@@ -36,7 +36,7 @@ import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
 
 public class ChatServer extends JFrame implements ActionListener {
-	private static final String WindowEvent = null;
+	public static final String WindowEvent = null;
 	public static int Port = 8888; // 服务端的侦听端口
 	ServerSocket serverSocket; // 服务端Socket
 	Image icon; // 程序图标
@@ -292,8 +292,8 @@ public class ChatServer extends JFrame implements ActionListener {
 				System.exit(0);
 			}
 		}else if (obj==helpItem) {
-			help heloDialog=new help(this);
-			heloDialog.show();
+			Help helpDialog=new Help(this);
+			helpDialog.show();
 		}else if (obj==sysMessage||obj==sysMessageButton) {
 			sendSystemMessage();
 		}

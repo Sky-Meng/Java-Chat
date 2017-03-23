@@ -25,7 +25,7 @@ public class ServerListen extends Thread{
 	/*
 	 * 聊天服务器端的用户上下下线侦听
 	 */
-	public ServerListen(ServerSocket serverSocket, JComboBox combobox, JTextArea messageShow, JTextField showStatus,
+	public ServerListen(ServerSocket server, JComboBox comboBox, JTextArea textArea, JTextField textField,
 			UserLinkList userLinkList) {
 		// TODO 自动生成的方法存根
 		this.server=server;
